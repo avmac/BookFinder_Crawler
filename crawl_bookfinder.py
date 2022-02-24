@@ -44,9 +44,9 @@ def check_and_notify_book_price(book_title : str, price_threshold : float, desti
         if cost < min_cost: # check if book option cost is lower than minimum cost
             min_cost = cost
 
-    print(f'Lowest current price for {book_title} is: {min_cost}€')
+    print(f'Current lowest price of book {book_title} is: {min_cost}€.')
 
-    if min_cost <= price_threshold:
+    if min_cost <= price_threshold and channel_id:
         notify = Notify(endpoint=f'https://notify.run/{channel_id}')
         notify.send(f'Book {book_title} costs {min_cost}€')
 
@@ -54,4 +54,4 @@ def check_and_notify_book_price(book_title : str, price_threshold : float, desti
 book_list = ['Practical Statistics for Data Scientists', 'Information Theory, Inference and Learning Algorithms', 'Machine Learning: A Probabilistic Perspective', 'Approaching (Almost) Any Machine Learning Problem']
 
 for book_title in book_list:
-    check_and_notify_book_price(book_title = book_title, price_threshold = 15, destination = 'PT', book_language = 'en', channel_id = 'ZZTT4BSCXwzzyxsujyez')
+    check_and_notify_book_price(book_title = book_title, price_threshold = 15, destination = 'PT', book_language = 'en', channel_id = None)
